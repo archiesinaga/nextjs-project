@@ -15,7 +15,7 @@ async function main() {
       {
         name: 'Admin User', 
         email: 'admin@example.com',
-        password: "admin",
+        password: hashedPasswordAdmin,
         role: 'SUPERVISOR' // Menggunakan SUPERVISOR sebagai role admin sementara
       },
       {
@@ -33,7 +33,7 @@ async function main() {
       {
         name: 'Standarisasi User',
         email: 'standarisasi@example.com',
-        password: hashedPasswordhashedPasswordAdminStandarisasi,
+        password: hashedPasswordStandarisasi,
         role: 'STANDARISASI'
       }
     ]
