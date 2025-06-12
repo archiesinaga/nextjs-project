@@ -14,6 +14,7 @@ declare module "next-auth" {
 }
 
 export default NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: "jwt" },
   providers: [
     CredentialsProvider({
@@ -21,23 +22,34 @@ export default NextAuth({
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      authorize: async (credentials) => {
-        if (!credentials?.email || !credentials?.password) return null;
-
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        });
-
-        if (user && await bcrypt.compare(credentials.password, user.password)) {
-          return { 
-            id: user.id, 
-            name: user.name, 
-            email: user.email, 
-            role: user.role 
-          };
+      async authorize(credentials, req) {
+        // Validasi credentials
+        if (!credentials?.email || !credentials?.password) {
+          return null;
         }
 
-        return null;
+        try {
+          // Cari user berdasarkan email
+          const user = await prisma.user.findUnique({
+            where: { email: credentials.email },
+          });
+
+          // Verifikasi user dan password
+          if (user && await bcrypt.compare(credentials.password, user.password)) {
+            // Return user object dengan semua properti yang diperlukan
+            return {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              role: user.role,
+            };
+          }
+
+          return null;
+        } catch (error) {
+          console.error("Authorization error:", error);
+          return null;
+        }
       },
     }),
   ],

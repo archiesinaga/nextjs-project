@@ -1,35 +1,52 @@
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const password = await bcrypt.hash('password123', 10);
+  // Hash password untuk setiap user dengan password yang berbeda
+  const hashedPasswordAdmin = await bcrypt.hash('admin', 10);
+  const hashedPasswordManager = await bcrypt.hash('manager', 10);
+  const hashedPasswordSupervisor = await bcrypt.hash('supervisor', 10);
+  const hashedPasswordStandarisasi = await bcrypt.hash('standardization', 10);
 
   await prisma.user.createMany({
     data: [
       {
-        email: 'supervisor@example.com',
+        name: 'Admin User', 
+        email: 'admin@example.com',
+        password: hashedPasswordAdmin,
+        role: 'SUPERVISOR' // Menggunakan SUPERVISOR sebagai role admin sementara
+      },
+      {
         name: 'Supervisor User',
-        password,
+        email: 'supervisor@example.com',
+        password: hashedPasswordSupervisor,
         role: 'SUPERVISOR'
       },
       {
-        email: 'manager@example.com',
         name: 'Manager User',
-        password,
+        email: 'manager@example.com',
+        password: hashedPasswordManager,
         role: 'MANAGER'
       },
       {
-        email: 'standarisasi@example.com',
         name: 'Standarisasi User',
-        password,
+        email: 'standarisasi@example.com',
+        password: hashedPasswordStandarisasi,
         role: 'STANDARISASI'
       }
     ]
   });
+
+  console.log('Seeding completed successfully!');
 }
 
 main()
-  .catch(e => console.error(e))
-  .finally(async () => await prisma.$disconnect());
+  .catch(e => {
+    console.error('Error during seeding:', e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
