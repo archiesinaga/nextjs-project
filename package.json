@@ -16,8 +16,10 @@
     "@prisma/client": "^5.22.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
     "next": "^14.2.29",
     "next-auth": "^4.24.11",
+    "pg": "^8.16.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -27,10 +29,10 @@
     "@types/node": "^24.0.0",
     "@types/react": "^19.1.7",
     "@types/react-dom": "^19.1.6",
+    "cross-env": "^7.0.3",
     "prisma": "^5.22.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.1",
-    "typescript": "^5.8.3",
-    "cross-env": "^7.0.3"
+    "typescript": "^5.8.3"
   }
 }
