@@ -1,0 +1,36 @@
+{
+  "name": "document-control",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "prisma": {
+      "migrate": "prisma migrate dev --name init",
+      "seed": "NODE_OPTIONS='--loader ts-node/esm --experimental-specifier-resolution=node' ts-node prisma/seed.ts",
+      "seed:alt": "tsx prisma/seed.ts"
+    },
+    "prisma:seed": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' prisma/seed.ts",
+    "prisma:seed-legacy": "NODE_OPTIONS='--loader ts-node/esm' ts-node prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "next": "^14.2.29",
+    "next-auth": "^4.24.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.7",
+    "@types/react-dom": "^19.1.6",
+    "prisma": "^5.22.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.1",
+    "typescript": "^5.8.3"
+  }
+}
