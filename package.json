@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "prisma:migrate": "prisma migrate dev --name init",
-    "prisma:seed": "NODE_OPTIONS='--loader ts-node/esm --experimental-specifier-resolution=node' ts-node prisma/seed.ts",
+    "prisma:seed": "cross-env NODE_OPTIONS='--loader ts-node/esm --experimental-specifier-resolution=node' ts-node prisma/seed.ts",
     "prisma:seed:alt": "tsx prisma/seed.ts",
     "prisma:seed:node": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' prisma/seed.ts",
     "prisma:seed:legacy": "NODE_OPTIONS='--loader ts-node/esm' ts-node prisma/seed.ts"
@@ -23,12 +23,14 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^24.0.0",
     "@types/react": "^19.1.7",
     "@types/react-dom": "^19.1.6",
     "prisma": "^5.22.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "cross-env": "^7.0.3"
   }
 }
