@@ -6,13 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prisma": {
-      "migrate": "prisma migrate dev --name init",
-      "seed": "NODE_OPTIONS='--loader ts-node/esm --experimental-specifier-resolution=node' ts-node prisma/seed.ts",
-      "seed:alt": "tsx prisma/seed.ts"
-    },
-    "prisma:seed": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' prisma/seed.ts",
-    "prisma:seed-legacy": "NODE_OPTIONS='--loader ts-node/esm' ts-node prisma/seed.ts"
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:seed": "NODE_OPTIONS='--loader ts-node/esm --experimental-specifier-resolution=node' ts-node prisma/seed.ts",
+    "prisma:seed:alt": "tsx prisma/seed.ts",
+    "prisma:seed:node": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' prisma/seed.ts",
+    "prisma:seed:legacy": "NODE_OPTIONS='--loader ts-node/esm' ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
