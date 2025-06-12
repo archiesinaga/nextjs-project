@@ -1,6 +1,6 @@
-module.exports = {
+export default {
   webpack: (config) => {
-    config.resolve.fallback = { 
+    config.resolve.fallback = {
       ...config.resolve.fallback,
       tls: false,
       net: false,
